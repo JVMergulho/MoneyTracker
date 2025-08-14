@@ -13,17 +13,17 @@ struct AddExpenseIntent: AppIntent {
     static var description: IntentDescription = "Adiciona uma despesa ao seu histórico financeiro."
     static var openAppWhenRun: Bool = false
     
-    @Parameter(title: "Título", description: "O que você gastou.")
+    @Parameter(title: "Descrição", description: "O que você gastou.")
     var transactionTitle: String
     
     @Parameter(title: "Valor", description: "O valor da despesa.")
     var transactionAmount: Double
     
     @Parameter(title: "Categoria", description: "A categoria da despesa.")
-    var transactionCategory: TransactionCategoryAppEnum?
+    var transactionCategory: ExpenseCategoryAppEnum
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        let modelCategory = transactionCategory?.toModelCategory ?? .other
+        let modelCategory = transactionCategory.toModelCategory
         let finalAmount = -transactionAmount // Despesa, então o valor é negativo.
         
         do {
@@ -51,17 +51,17 @@ struct AddGainIntent: AppIntent {
     static var description: IntentDescription = "Adiciona um ganho ao seu histórico financeiro."
     static var openAppWhenRun: Bool = false
     
-    @Parameter(title: "Título", description: "O que você recebeu.")
+    @Parameter(title: "Descrição", description: "O que você recebeu.")
     var transactionTitle: String
     
     @Parameter(title: "Valor", description: "O valor do ganho.")
     var transactionAmount: Double
     
     @Parameter(title: "Categoria", description: "A categoria do ganho.")
-    var transactionCategory: TransactionCategoryAppEnum?
+    var transactionCategory: GainCategoryAppEnum
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        let modelCategory = transactionCategory?.toModelCategory ?? .other
+        let modelCategory = transactionCategory.toModelCategory
         let finalAmount = transactionAmount // Ganho, então o valor é positivo.
         
         do {

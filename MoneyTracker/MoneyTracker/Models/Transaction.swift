@@ -12,6 +12,7 @@ import SwiftData
 // A 'enum' para definir as categorias das movimentações.
 // 'CaseIterable' nos permite iterar sobre todos os casos para o seletor na interface.
 enum Category: String, CaseIterable, Codable {
+    case extra = "Ganho Extra"
     case salary = "Salário"
     case leisure = "Lazer"
     case food = "Alimentação"
